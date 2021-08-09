@@ -2,7 +2,9 @@
 title: 'Tarea 1: Utilizando R como calculadora'
 author: "ContrerasNk"
 date: "9/8/2021"
-output: html_document
+output:
+  pdf_document:
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
