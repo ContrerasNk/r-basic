@@ -1,0 +1,88 @@
+---
+title: "Apuntes-CursoEstadistica"
+author: "Julio Cesar Contreras Huerta"
+date: "7/17/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+### Funciones Scan y Fix para generar vectores o modificarlos
+
+```{r setup, include=FALSE, eval=FALSE}
+scan() # ponemos los valores manualmente para crear un vector, podemos jalar vectores guardados en internet
+x <- c(6, 2, 3)
+fix(x) # modificamos manualmente un vector
+
+rep(1999, 10)
+vec <- scan()
+fix(vec)
+scan(what = "character", sep = ",")
+
+seq(0, by = 2, length.out = 20)
+seq(17, 98, length.out = 30)
+```
+
+
+### Ejercicio práctico para ver si sort y rev se aplica en cualquier tiempo
+```{r}
+VecPrueb <- scan() # Enter al acabar
+VecPrueb1 <- VecPrueb
+VecPrueb2 <- VecPrueb
+
+rev(sort(VecPrueb1))
+sort(rev(VecPrueb1))
+```
+
+### Apuntes Subvectores y filtros
+
+```{r}
+x = seq(3, 50, by = 3.5)
+x[length(x)-1] 
+x[length(x)-2] 
+x[-3]
+x[4:8]
+x[8:4]
+x[seq(2, length(x), by = 2)] # Posicion par
+x[-seq(2, length(x), by = 2)] # eliminar la posicion par
+x[(length(x)-3):length(x)] # Los ultimos 4
+
+which(x>4) # posicion
+x[which(x>4)] # me da los valores de posicion
+
+which.min(x) # es igual a
+which(x == min(x))
+
+x = NULL
+y = NULL
+
+vect <- c(x,2,3,y,6)
+vect # [1] 2 3 6 valores del vector, no considera la posicion del NULL, eso lo diferencia de los valores NA
+```
+
+### Factores
+
+```{r}
+# Desde un vector partimos para los factores
+vect2 <- c(1,23,5,6,9,14, 14, 15, 15, 8, 1, 1)
+vect2.factor <- as.factor(vect2)
+vect2.factor
+vect2.factorr <- factor(vect2)
+vect2.factorr # Hasta ahora son lo mismo
+
+vect3 <- c("H", "M", "M", "H", "M", "H", "H")
+vect3.factorr <- factor(vect3, levels = c("H", "M", "B")) # Esto no se puede hacer con as.factor
+
+vect4.factorr <- factor(vect3, levels = c("H", "M", "B"), labels = c("Hombre", "Mujer", "Bisexual")) # Tambien se puede cambiar las etiquetas
+levels(vect4.factorr ) <- c("Men", "Women", "Bi")
+
+# Podemos agregar orden en los niveles = levels: comando ordered
+fac = factor(c(1,1,1,2,2,3,2,4,1,3,3,4,2,3,4,4), 
+       levels = c(1,2,3,4), labels = c("Sus","Apr","Not","Exc")) # sin orden
+fac
+
+facOrd = ordered(c(1,1,1,2,2,3,2,4,1,3,3,4,2,3,4,4), 
+       levels = c(1,2,3,4), labels = c("Sus","Apr","Not","Exc")) # con orden
+facOrd
+```
+
