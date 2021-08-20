@@ -1,0 +1,199 @@
+---
+title: An R Markdown document converted from "06-Functions.ipynb"
+output: html_document
+---
+
+# Funciones en Python
+
+```{python}
+def suma(x, y):
+    return x+y
+```
+
+```{python}
+class Operaciones(object):
+    def suma(self, x, y):
+        self.resultado = x+y
+        return self.resultado
+```
+
+```{python}
+suma(2,3)
+```
+
+```{python}
+operInstance = Operaciones()
+operInstance.suma(2,3)
+```
+
+```{python}
+def saludar():
+    name = str(input("Introduce tu nombre: "))
+    if name:
+        print("Hola "+name)
+    else:
+        print("Hola, estoy programando!")
+```
+
+```{python}
+saludar()
+```
+
+```{python}
+suma(2,3)*5
+```
+
+```{python}
+def buscaPares():
+    for x in range(10):
+        if x % 2 == 0:
+            return
+    print("Fin de la ejecución")
+```
+
+```{python}
+buscaPares()
+```
+
+```{python}
+def sumaresta(x,y=0):
+    suma = x+y
+    resta = x-y
+    return (suma, resta)
+```
+
+```{python}
+sumaresta(x=2,y=3)
+```
+
+```{python}
+sumaresta(5)
+```
+
+```{python}
+def suma(*args):
+    return sum(args)
+```
+
+```{python}
+suma(1,2)
+```
+
+```{python}
+suma(1,2,3,4)
+```
+
+```{python}
+suma(1,2,3,4,5,6,7,8,9,10)
+```
+
+```{python}
+def sumacuadrados(*datos):
+    total = 0
+    for d in datos:
+        total += d**2
+    return total
+```
+
+```{python}
+sumacuadrados(1,2,3)
+```
+
+```{python}
+sumacuadrados(2.5, 3.6, 8.9, -2, 12.67)
+```
+
+```{python}
+sumacuadrados2(1,2,3,4)
+```
+
+# Funciones anónimas
+
+```{python}
+doble = lambda x: x*2
+```
+
+```{python}
+doble(4)
+```
+
+```{python}
+cuadrado = lambda x: x**2
+```
+
+```{python}
+cuadrado(5)
+```
+
+```{python}
+suma = lambda x, y: x+y
+```
+
+```{python}
+suma(2,3)
+```
+
+```{python}
+from functools import reduce
+```
+
+```{python}
+data = [1,2,3,4,5,6,7,8,9,10]
+```
+
+```{python}
+filtered_data = list(filter(lambda x: (x*2>8), data))
+```
+
+```{python}
+filtered_data
+```
+
+```{python}
+mapped_data = list(map(lambda x: x*2, data))
+```
+
+```{python}
+mapped_data
+```
+
+```{python}
+reduced_data = reduce(lambda x, y: x+y, data)
+```
+
+```{python}
+reduced_data
+```
+
+```{python}
+import pandas as pd
+```
+
+```{python}
+data = pd.read_csv("../../data/bodyfat.txt", delimiter=" ")
+```
+
+```{python}
+data.head()
+```
+
+```{python}
+data.tail()
+```
+
+```{python}
+data.iloc[[0]]
+```
+
+```{python}
+data.loc[[0]]
+```
+
+```{python}
+data[1:10:2]
+```
+
+```{python}
+data.describe()
+```
+

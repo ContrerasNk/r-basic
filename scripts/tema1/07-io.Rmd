@@ -1,0 +1,138 @@
+---
+title: An R Markdown document converted from "07-io.ipynb"
+output: html_document
+---
+
+# Entrada y salida de datos
+
+```{python}
+print("Hola, me llamo Juan Gabriel")
+```
+
+```{python}
+x = 5
+print(x)
+```
+
+```{python}
+print("El valor de la variable x es: "+str(x))
+```
+
+```{python}
+texto = input("Introduce aquí tu nombre: ")
+```
+
+```{python}
+texto
+```
+
+```{python}
+numero = int(input("Introduce aquí tu edad"))
+```
+
+```{python}
+numero
+```
+
+```{python}
+2*numero + 5
+```
+
+```{python}
+x = 5
+```
+
+```{python}
+print(x)
+```
+
+```{python}
+x = 'j'
+```
+
+```{python}
+print(x)
+```
+
+```{python}
+x = 3.1415
+```
+
+```{python}
+print(x)
+```
+
+```{python}
+x = True
+```
+
+```{python}
+print(x)
+```
+
+```{python}
+x = 'h'
+```
+
+```{python}
+print("La variable x ahora se trata de un carácter: "+ x)
+```
+
+```{python}
+x = 5
+```
+
+```{python}
+print("La variable x es entera: "+str(x))
+```
+
+```{python}
+x = "La variable x es ahora una cadena de caracteres (string)"
+```
+
+```{python}
+print(x)
+```
+
+# Operadores de decisión
+
+```{python}
+si condicion booleana:
+    código que se ejecuta si la condición es verdad
+    ..
+    ..
+    ..
+siguiente código que se ejecuta siempre
+```
+
+```{python}
+x = int(input("Escribe un número:"))
+```
+
+```{python}
+if x == 5:
+    print("Has escrito el número 5")
+```
+
+```{python}
+x = int(input("Escribe un número:"))
+if x < 5:
+    print("Has escrito un número menor que 5")
+elif x < 10:
+    print("Has escrito un número menor que 10 y mayor o igual a 5")
+else:
+    print("EL número que has escrito es mayor o igual que 10")
+```
+
+```{python}
+x = int(input("Escribe un número:"))
+if x>0 and x < 10:
+    print("Has escrito un número en el rango de [0,10]")
+```
+
+```{python}
+x = int(input("Escribe un número:"))
+if x < 0 or x > 10:
+    print("Tu número escrito no se encuentra dentro del rango [0,10]")
+```
+

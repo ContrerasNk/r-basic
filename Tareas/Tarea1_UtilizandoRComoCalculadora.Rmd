@@ -49,8 +49,10 @@ if (yr %% 4 != 0) {
                " con ", as.character(trunc((dy - trunc(dy)) * 24)), 
                " horas"))
 }
-
-
+# library(lubridate)
+# fecha_inicial <- as.POSIXct("2018-01-01 00:00:00")
+# fecha_final = fecha_inicial  + seconds(250000000)
+# print(fecha_final)
 ```
 ## 2. Cread una función que os resuelva una ecuación de primer grado (de la forma Ax+B = 0). Es decir, vosotros tendréis que introducir como parámetros los coeficientes (en orden) y la función os tiene que devolver la solución. Por ejemplo, si la ecuación es 2x+4=0, vuestra función os tendría que devolver -2.
 

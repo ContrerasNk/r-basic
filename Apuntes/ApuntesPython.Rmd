@@ -1,0 +1,439 @@
+---
+title: <center> <h1> **Apuntes Python Estadística descriptiva** </h1> </center>
+author: <center> <h2> *Julio Cesar Contreras* </h2> </center>
+date: "***`r format(Sys.time(), '%B %d, %Y')`***"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 6 # es el nivel de subtitulos que se incluira en el indice
+    toc_float:
+      collapsed: true # solo muestra encabezados nivel 1 en el indice
+      smooth_scroll: true # pasar a de titulos animadamentes con clic en el indice
+    number_sections: true
+    theme: journal # se puede css: con algun style.css
+    fig_width: 7
+    fig_height: 6
+---
+
+
+```{r eval=FALSE, echo=FALSE, message=FALSE}
+# rstudioapi::restartSession()
+Sys.setenv(RETICULATE_PYTHON = "C:/Users/Contreras/miniconda3/python.exe") # antes que todo
+reticulate::py_config() # rutas
+```
+
+## Librerías
+
+```{python eval = TRUE, warning = FALSE, comment = '', message = FALSE}
+import math 
+```
+
+# Constantes en Python
+
+
+```{python warning = FALSE, comment = '', message = FALSE}
+math.pi
+math.e
+
+math.tau # dos pi y es un double
+
+math.inf # infinito
+
+-math.inf
+
+float('inf') # tiene 8 digitos de precision, mientras que un double tiene 16 digitos
+
+math.nan # not a number, NA not available
+
+float('nan')
+
+math.pow(math.nan, 0) # Potencia nan^0
+
+math.nan + 5 # nan mas algo es nan
+
+math.hypot(math.nan, math.inf) # potencia tambien creo
+```
+## Errores
+
+```{python eval = FALSE, echo = TRUE}
+math.sqrt(-1.0) # Error de dominio
+
+math.log(0.0) # Value error, el input está mal, problema de dominio
+
+math.exp(1000.0) # overflowError demasiados decimales
+```
+
+
+# Representación numérica
+
+```{python warning = FALSE, comment = '', message = FALSE}
+2+2
+
+3-5
+
+3*5
+
+3/5
+
+math.ceil(3.4523) # redondeo a la alza al entero superior
+
+math.floor(3.4523) # redondeo a la baja
+
+math.trunc(3.4523) # se parece al floor
+
+math.copysign(3, -2) # copia signo del segundo termino
+
+math.copysign(3.0, -0.0)
+
+math.fabs(5)
+
+math.fabs(-5.0) # valor absoluto
+
+math.fabs(-5.4)
+
+2**5 # exponenciacion
+
+math.factorial(4)
+
+x = 5
+y = 2
+
+# Con sympy hacemos combinatoria directo
+math.factorial(x) / (math.factorial(y) * math.factorial(x-y)) # combinatorio
+
+math.fmod(7,3) # resto, en R %%, se puede trabajar con numeros racionales
+
+7%3 # resto, trbajar con numeros enteros
+
+7//3 # cociente division entera
+
+math.remainder(7, 3) # cociente division entera
+
+math.modf(-4.25) # separa parte entera y decimal: tupla
+
+math.gcd(24, 36) # maximo comun divisor
+
+math.gcd(3, 7)
+
+math.isfinite(2.5) # es infinito: logical
+
+math.isinf(4.6)
+
+math.isnan(4.5) # is it nan? : logical
+
+math.sqrt(2)**2 == 2 # complicado, la primera operacion ya tiene decimales
+
+math.isclose(math.sqrt(2)**2, 2, rel_tol=1e-09) # comparamos los dos primeros argumentos, con rel_tol le damos tolereancia de decimales.
+
+math.sqrt(2)**2
+```
+
+# Entrada y salida de datos
+
+```{python warning = FALSE, comment = '', message = FALSE}
+print("Hola, me llamo Julio Cesar")
+x = 5
+print(x)
+print("El valor de la variable x es: " + str(x)) # join phrases
+```
+
+
+```{python warning = FALSE, comment = '', message = FALSE}
+x = 5
+
+print(x)
+
+x = 'j'
+
+print(x)
+
+x = 3.1415
+
+print(x)
+
+x = True
+
+print(x)
+
+x = 'h'
+
+print("La variable x ahora se trata de un car?cter: "+ x)
+
+x = 5
+
+print("La variable x es entera: " + str(x))
+
+x = "La variable x es ahora una cadena de caracteres (string)"
+
+print(x)
+```
+
+## Input de usuarios
+
+```{python eval = FALSE, echo = TRUE}
+texto = input("Introduce aquí tu nombre: ") # interactive input
+texto
+
+numero = int(input("Introduce aquí tu edad"))
+numero
+
+2 * numero + 5
+```
+
+
+# Operadores de decisión
+
+Regla del tabulador.
+<br/>
+si condicion booleana:
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;código que se ejecuta si la condición es verdad
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;..
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;..
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;..
+<br/>
+siguiente código que se ejecuta siempre
+
+
+```{python eval = FALSE, echo = TRUE}
+x = int(input("Escribe un número:"))
+
+if x == 5:
+    print("Has escrito el número 5")
+
+x = int(input("Escribe un número:"))
+if x < 5:
+    print("Has escrito un número menor que 5")
+elif x < 10:
+    print("Has escrito un número menor que 10 y mayor o igual a 5")
+else:
+    print("EL número que has escrito es mayor o igual que 10")
+
+```
+
+```{python eval = FALSE, echo = TRUE}
+x = int(input("Escribe un número:"))
+if x > 0 and x < 10:
+    print("Has escrito un número en el rango de [0,10]")
+    
+x = int(input("Escribe un número:"))
+if x < 0 or x > 10:
+    print("Tu número escrito no se encuentra dentro del rango [0,10]")
+```
+
+
+# Funciones matemáticas
+
+```{python}
+math.exp(3) # más precisa
+
+math.e**3
+
+math.pow(math.e, 3) # equivalente al segundo
+
+math.expm1(1) # exponencial de e, menos 1, más precisa, 16 digitos de precisión
+
+math.exp(1) - 1
+
+math.exp(1e-05)-1
+
+math.expm1(1e-05)
+
+math.log(12)
+
+math.log(12, 2)
+
+math.log1p(1e-5)
+
+math.log2(32)
+
+math.log10(1000000)
+
+math.sqrt(64)
+
+math.sin(180)
+
+math.cos(math.pi)
+
+math.tan(math.pi/2) # numero equivalente a infinito
+
+math.asin(1)
+
+math.acos(1)
+
+math.atan(1) # respuesta en radianes
+
+math.degrees(0.7853981633974483) # de radianos a grados
+
+math.radians(60) # de grados a radianes
+
+math.cos(math.radians(60))
+
+math.hypot(3, 4) # longitud de un vector
+
+math.sqrt(3**2 + 4**2) # igual al anterior
+
+math.degrees(math.atan2(4, 3)) # (y, x), atan2 angulo de -pi y pi
+
+math.sinh(0) # seno hiperbolico
+
+math.cosh(0)
+
+math.tanh(0)
+
+math.erf(0)
+
+math.erf(math.pi) # para trabajar con distribucion acumulada
+
+math.erfc(math.pi) # complementaria del anterior
+
+math.gamma(5.5) # gamma de 0 no existe. Es el factorial complejo de un numero anterior y da para decimales.
+
+math.lgamma(5) # logaritmo de la función gamma
+```
+# Funciones en Python
+
+## Función
+
+```{python warning = FALSE, comment = '', message = FALSE}
+def suma(x, y): # funcion sola
+    return x+y
+```
+
+## Método
+
+Todos los métodos son funciones pero no todas las funciones son métodos.
+
+```{python warning = FALSE, comment = '', message = FALSE}
+class Operaciones(object):
+    def suma(self, x, y): # funcion como método
+        self.resultado = x+y
+        return self.resultado
+```
+
+```{python warning = FALSE, comment = '', message = FALSE}
+suma(2,3) # llamo a la funcion
+
+operInstance = Operaciones() # llamo a la clase y le meto punto cuando llamo a la funcion aca se referencia el self
+operInstance.suma(2,3)
+```
+
+```{python eval = FALSE}
+def saludar():
+    name = str(input("Introduce tu nombre: "))
+    if name:
+        print("Hola "+name)
+    else:
+        print("Hola, estoy programando!")
+
+saludar()
+```
+
+```{python warning = FALSE, comment = '', message = FALSE}
+suma(2,3)*5
+
+def buscaPares():
+    for x in range(10):
+        if x % 2 == 0:
+            return # acaba con la definición de la función
+    print("Fin de la ejecución")
+
+buscaPares()
+
+def sumaresta(x,y=0):
+    suma = x+y
+    resta = x-y
+    return (suma, resta)
+  
+sumaresta(x=2,y=3) # si no estuviera el y = 3, se pone por defecto el 3
+
+sumaresta(5)
+```
+
+## Función con variables indefinidas
+
+```{python warning = FALSE, comment = '', message = FALSE}
+def suma(*args): # separadas con comas
+    return sum(args)
+suma(1,2)
+
+suma(1,2,3,4)
+
+suma(1,2,3,4,5,6,7,8,9,10)
+```
+
+```{python warning = FALSE, comment = '', message = FALSE}
+def sumacuadrados(*datos):
+    total = 0
+    for d in datos:
+        total += d**2 # total = total + d**2
+    return total
+
+sumacuadrados(1,2,3)
+
+sumacuadrados(2.5, 3.6, 8.9, -2, 12.67)
+
+sumacuadrados(1,2,3,4)
+```
+
+# Funciones anónimas
+Sintaxis reducida
+
+```{python warning = FALSE, comment = '', message = FALSE}
+doble = lambda x: x*2
+
+doble(4)
+
+cuadrado = lambda x: x**2
+
+cuadrado(5)
+
+suma = lambda x, y: x+y
+
+suma(2,3)
+```
+
+Aquí vemos la importancia de lambda mapa map, reduce, etc.
+
+```{python}
+from functools import reduce
+
+data = [1,2,3,4,5,6,7,8,9,10]
+
+filtered_data = list(filter(lambda x: (x*2>8), data)) # listamos la respuesta con list(), con la función filter, el primer argumentos es una lambda, que nos dice que si los numeros multiplicados por 2 exceden a 8, pues se filtre, y eso se aplicará a cada elemento de la lista data, que es el segundo argumento
+
+filtered_data
+
+mapped_data = list(map(lambda x: x*2, data)) # con map se aplica la funcion a cada elemento de lista y luego los elementos finales se coloquen en una lista
+
+mapped_data
+
+reduced_data = reduce(lambda x, y: x+y, data) # reduce hace lo que la funcion condicionante (lambda) le pida, pero a todos elementos de una lista y uno tras el otro, eso quiere decir que sumara todos los elementos.
+
+reduced_data
+```
+
+```{python}
+import pandas as pd
+```
+
+```{python eval = FALSE}
+data = pd.read_csv("../../data/bodyfat.txt", delimiter=" ")
+
+data.head()
+
+data.tail()
+
+data.iloc[[0]]
+
+data.loc[[0]]
+
+data[1:10:2]
+
+data.describe()
+```
+
