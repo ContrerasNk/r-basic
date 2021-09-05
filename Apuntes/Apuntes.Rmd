@@ -3,11 +3,47 @@ title: "Apuntes-CursoEstadistica"
 author: "Julio Cesar Contreras Huerta"
 date: "7/17/2021"
 output:
-  pdf_document: default
-  html_document: default
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 6
+    toc_float:
+      collapsed: False
+      smooth_scroll: true 
+    number_sections: true
+    theme: journal 
+    fig_width: 7
+    fig_height: 6
 ---
 
-### Funciones Scan y Fix para generar vectores o modificarlos
+<style>
+body {
+text-align: justify
+h1.title: left}
+</style>
+
+<style type="text/css">
+
+h1.title {
+  font-size: 45px;
+  color: #fc9272;
+  text-align: center;
+}
+
+h4.author {
+  font-size: 25px;
+  color: #fc9272;
+  text-align: center;
+}
+h4.date {
+  font-size: 20px;
+  color: #fc9272;
+  text-align: center;
+}
+</style>
+
+
+# Funciones Scan y Fix para generar vectores o modificarlos
 
 ```{r setup, include=FALSE, eval=FALSE}
 scan() # ponemos los valores manualmente para crear un vector, podemos jalar vectores guardados en internet
@@ -19,14 +55,21 @@ vec <- scan()
 fix(vec)
 scan(what = "character", sep = ",")
 
-seq(0, by = 2, length.out = 20)
-seq(17, 98, length.out = 30)
+```
+# Diferentes formas de seq
+
+
+```{r comment=''}
+seq(0, by = 2, length.out = 20) # Desde el 0 y crece de 2 en 2 y es de longitud 20
+seq(17, 98, length.out = 30) # Desde 17 a 98 longitud 30
 ```
 
+# Ejercicio práctico para ver si sort y rev se aplica en cualquier tiempo
 
-### Ejercicio práctico para ver si sort y rev se aplica en cualquier tiempo
-```{r}
-VecPrueb <- scan() # Enter al acabar
+
+
+```{r eval = FALSE}
+VecPrueb <- scan(dec = ",") # Enter al acabar, por si escribo los números con 3,4 == 3.4
 VecPrueb1 <- VecPrueb
 VecPrueb2 <- VecPrueb
 
@@ -34,9 +77,8 @@ rev(sort(VecPrueb1))
 sort(rev(VecPrueb1))
 ```
 
-### Apuntes Subvectores y filtros
-
-```{r}
+# Apuntes Subvectores y filtros
+```{r comment=''}
 x = seq(3, 50, by = 3.5)
 x[length(x)-1] 
 x[length(x)-2] 
@@ -44,25 +86,61 @@ x[-3]
 x[4:8]
 x[8:4]
 x[seq(2, length(x), by = 2)] # Posicion par
+x[x%%2==0]# tambien par
+x[x%%2==1] # posicion impar
 x[-seq(2, length(x), by = 2)] # eliminar la posicion par
 x[(length(x)-3):length(x)] # Los ultimos 4
+x[x>=10]
+subset(x,x>=10) # tambien
+x[!x<10] # igual al anterior script
 
 which(x>4) # posicion
 x[which(x>4)] # me da los valores de posicion
 
-which.min(x) # es igual a
+x = c(1,1,3,6,9,2,10,10)
+which.min(x) # solo da la primera posicion y es igual a
 which(x == min(x))
+x[which.max(x)]
 
+x = c() # NULL
 x = NULL
 y = NULL
 
 vect <- c(x,2,3,y,6)
 vect # [1] 2 3 6 valores del vector, no considera la posicion del NULL, eso lo diferencia de los valores NA
 ```
+# NAs: Not Avalaible
 
-### Factores
+```{r comment=''}
+x = c(1,5,6,7)
+y = c(1,4,NA,NA,5,NA,10,3)
+x[length(x) + 5] # existe la posición, pero es un NA
+x[length(x) + 5] = 9 # se completa los valores intermedios con el nuevo
+x[length(x) + 5] # ahora si tiene posición
+which(x==NA) # existe, pero es un concepto, no un elemento, por eso utilizamos
+is.na(x) # vector lógico
+which(is.na(x)) # posiciones de NA
+x[which(is.na(x))] # ahora si podemos extraer los valores de NA
+na.omit(x) # igual al de arriba, pero no viene limpia en forma de un vector
+y[is.na(y)] = mean(y, na.rm = TRUE)
+sum(x[!is.na(x)])
+# cumsum(x, na.rm = TRUE) no funciona
+cumsum(x[!is.na(x)]) # este sí
+x_clean = na.omit(x)
+x_clean
 
-```{r}
+attr(x_clean, "class") = NULL # no lo limpia, no se por qué
+x_clean
+
+attr(x_clean, "na.action") = NULL # este sí limpia y lo deja como vector
+x_clean
+
+as.vector(x_clean) # lo vuelve vector, mas facil
+```
+
+# Factores
+
+```{r comment=''}
 # Desde un vector partimos para los factores
 vect2 <- c(1,23,5,6,9,14, 14, 15, 15, 8, 1, 1)
 vect2.factor <- as.factor(vect2)
@@ -72,17 +150,45 @@ vect2.factorr # Hasta ahora son lo mismo
 
 vect3 <- c("H", "M", "M", "H", "M", "H", "H")
 vect3.factorr <- factor(vect3, levels = c("H", "M", "B")) # Esto no se puede hacer con as.factor
+vect3.factorr
 
 vect4.factorr <- factor(vect3, levels = c("H", "M", "B"), labels = c("Hombre", "Mujer", "Bisexual")) # Tambien se puede cambiar las etiquetas
 levels(vect4.factorr ) <- c("Men", "Women", "Bi")
+vect4.factorr
 
 # Podemos agregar orden en los niveles = levels: comando ordered
+# Aparece desigualdades "<"
 fac = factor(c(1,1,1,2,2,3,2,4,1,3,3,4,2,3,4,4), 
        levels = c(1,2,3,4), labels = c("Sus","Apr","Not","Exc")) # sin orden
 fac
 
 facOrd = ordered(c(1,1,1,2,2,3,2,4,1,3,3,4,2,3,4,4), 
-       levels = c(1,2,3,4), labels = c("Sus","Apr","Not","Exc")) # con orden
+       levels = c(1,2,3,4), labels = c("Sus","Apr","Not","Exc")) # con orden suspendió,..
 facOrd
 ```
 
+# Listas
+
+```{r comment=''}
+x = c(1,5,-2,6,-7,8,-3,4,-9)
+L = list(nombre="temperaturas", datos=x, media=mean(x), sumas = cumsum(x))
+L
+
+#Selección de elementos de lista con $, como lo que son y no como lista (seleccion con solo una []), esta es parecido a la selección con [[]]
+L$nombre
+class(L$nombre)
+L[[1]] # selección por posición
+class(L[[1]])
+L[1] # es una lista
+class(L[1])
+# 3*L[2] error, no se puede multiplicar un numero con una lista, aunque sea por dentro vector
+3*L[[2]]
+
+#Estructura interna de una lista
+str(L)
+names(L) # nombres de los componentes
+
+# parámetros de un lm, usar $ para ver parametros
+lm(c(1,2,3,4)~c(1,2,3,6))
+summary(lm(c(1,2,3,4)~c(1,2,3,6)))
+```

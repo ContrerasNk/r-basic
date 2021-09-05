@@ -1,0 +1,127 @@
+---
+title: "Analisis del Binomio de Newton"
+author:  "Julio Cesar Contreras Huerta"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 6
+    toc_float:
+      collapsed: False
+      smooth_scroll: true 
+    number_sections: true
+    theme: journal 
+    fig_width: 7
+    fig_height: 6
+---
+
+<style>
+body {
+text-align: justify
+h1.title: left}
+</style>
+
+<style type="text/css">
+
+h1.title {
+  font-size: 45px;
+  color: #fc9272;
+  text-align: center;
+}
+
+h4.author {
+  font-size: 25px;
+  color: #fc9272;
+  text-align: center;
+}
+h4.date {
+  font-size: 20px;
+  color: #fc9272;
+  text-align: center;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Producto notable
+
+La fórmula del producto notable es
+
+$$(a+b)^2 = a^2+2ab+b^2$$
+
+# Función con R: producto notable
+
+```{r results='hold', comment=''}
+binomioNewton2 = function(a,b){
+  a^2+2*a*b+b^2
+}
+binomioNewton2(1,2)
+binomioNewton2(2,1)
+```
+
+# Binomio de Newton: fórmula
+
+$$(a+b)^n = \sum_{k=0}^n {n\choose k}\cdot a^{n-k}\cdot b^k = {n\choose 0}\cdot a^n\cdot b^0+\cdots {n\choose n}\cdot a^0\cdot b^n$$
+
+# Permutación: fórmula, ejemplo 1
+
+De cuantas maneras pueden quedar asignados los títulos de **campeón y subcampeón**.
+De 4 equipos, i.e, $G = \{A,B,C,D\}$. Se tomará 2 equipos para definir a ambos.
+
+$$_{n}P_{r} = \frac{n!}{(n-r)!}$$
+$$_{4}P_{2} = \frac{4!}{(4-2)!} = \frac{4\cdot3\cdot2\cdot1}{2\cdot1} = 12$$
+***Interesa la posción de los elementos en el grupo formado.***
+
+# Combinatoria: fórmula, ejemplo 1
+
+¿Cuántos son los posibles partidos para definir los títulos de **campeón y subcampeón**?. Cuando hay 4 equipos, i.e, $G = \{A,B,C,D\}$.
+
+$$_{n}C_{r} = \frac{n!}{(n-r)!\cdot(r)!}$$
+$$_{4}C_{2} = \frac{4!}{(4-2)!\cdot(2)!}=\frac{4\cdot3\cdot2\cdot1}{2\cdot1\cdot2}=6$$
+***Interesa la presencia de los elementos en el grupo formado***
+
+# Probando cumsum R
+
+Suma consecutiva desde el primer elemento hasta el n-ésimo término (acumulado).
+
+```{r results='hold', comment=''}
+v = c(1,2,3,4)
+cumsum(v)
+cumsum(v)[length(v)] # sumatoria de todos los elementos, ultimo elemento
+```
+
+# Probando choose R: combinatoria ejemplo 1
+
+```{r results='hold', comment=''}
+v = c(1,2,3,4)
+choose(4,2) # ejemplo 1: 6
+choose(4,3)
+choose(4,4)
+```
+```{r results='hold', comment=''}
+choose(4, 2:4) # combinatoria de 4 a 2 , 4 a 3, 4 a 4
+choose(c(4,4,4), 2:4) # combinatoria de 4 a 2 , 4 a 3, 4 a 4, pueden ser otros, no solo 4
+```
+
+# Función con R: binomio de newton
+
+```{r results='hold', comment=''}
+binomioNewton = function(a,b,n){
+  cumsum(choose(n,(0:n))*a^{n-(0:n)}*b^(0:n))[n+1] # hay potencias en forma de vector
+}
+binomioNewton(2,1,2)
+binomioNewton(3,4,14)
+```
+
+```{r results='hold', comment=''}
+binomioNewton = function(a,b,n){
+  sum(choose(n,(0:n))*a^{n-(0:n)}*b^(0:n))
+}
+binomioNewton(2,1,2)
+binomioNewton(3,4,14)
+```
+
