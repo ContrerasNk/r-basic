@@ -1,0 +1,169 @@
+---
+title: 'Tarea: Estructura de Datos'
+author: "Julio Contreras"
+date: "5/9/2021"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 6
+    toc_float:
+      collapsed: false
+      smooth_scroll: true 
+    number_sections: false
+    theme: journal 
+    fig_width: 7
+    fig_height: 6
+---
+
+<style>
+body {
+text-align: justify
+h1.title: left}
+</style>
+
+<style type="text/css">
+
+h1.title {
+  font-size: 45px;
+  color: #fc9272;
+  text-align: center;
+}
+
+h4.author {
+  font-size: 25px;
+  color: #fc9272;
+  text-align: center;
+}
+h4.date {
+  font-size: 20px;
+  color: #fc9272;
+  text-align: center;
+}
+</style>
+
+
+# Pregunta 1:
+Cread un vector llamado "Harry" formado por la sucesión de números consecutivos entre el -10 y 27. Pedidle a R que os devuelva el elemento de índice 7. Escribid el resultado.
+
+```{r comment='', results='hold'}
+Harry = -10:27
+Harry[7]
+```
+
+# Pregunta 2:
+Dad el máximo de la sucesión (100*2^n -7*3^n) con n=0,...,200
+
+```{r comment='', results='hold'}
+n = 0:200
+max(100*2^n -7*3^n)
+```
+
+# Pregunta 3:
+Cread la sucesión de números consecutivos entre 0 y 40. A continuación, cread el vector (3*5^n - 1) con n=0,...,40. Ponedle como nombre x. Ahora, dad el subvector de los elementos que son estrictamente mayores que 3.5
+
+```{r comment='', results='hold'}
+n = 0:40
+x = 3*5^n - 1
+print("Son iguales para cada posición")
+subset(x, x > 3.5) == x[x > 3.5]
+print("El subconjunto es el siguiente")
+x[x > 3.5]
+```
+
+# Pregunta 4:
+Cread una función que os devuelva la parte real, la imaginaria, el módulo, el argumento y el conjugado de un número, mostrando solo 2 cifras significativas
+RECOMENDACIÓN: En algún momento os hará falta utilizar vectores
+
+```{r comment='', results='hold'}
+Complxs = function(x) {
+  v = c(Re(x), Im(x), Mod(x), Arg(x), Conj(x))
+  print(v, 2)
+}
+Complxs(2 + 3i)
+```
+
+
+# Pregunta 5:
+Cread una función que resuelva ecuaciones de segundo grado (de la forma Ax^2+Bx+C=0). No importa, por ahora, que tengáis en cuenta las que no tienen solución
+RECOMENDACIÓN: En algún momento os hará falta utilizar vectores
+
+```{r comment='', results='hold'}
+raizs = function(A, B, C){
+  r = c(-B+sqrt(B^2-4*A*C)/(2*A), -B-sqrt(B^2-4*A*C)/(2*A))
+  print(paste("Las raices son:", as.character(r[1]), "y", as.character(r[2])))
+} 
+raizs(1,2,1)
+```
+
+# Pregunta 6:
+Tomando el vector vec = c(0,9,98,2,6,7,5,19,88,20,16,0), dad 3 opciones diferentes para calcular el subvector c(9,19,20,16)
+
+Tomando el vector vec definido en el apartado anterior, buscad
+
+
+
+```{r comment='', results='hold'}
+vec = c(0, 9, 98, 2, 6, 7, 5, 19, 88, 20, 16, 0)
+vec[c(2,8,10,11)]
+vec[vec == 9 | vec == 19 | vec == 20 | vec == 16]
+vec[vec >= 9 & vec <= 20]
+```
+
+* qué entradas son pares
+
+```{r comment=''}
+vec[vec %% 2 == 0]
+```
+
+* qué entradas no son pares y mayores que 20
+
+```{r comment=''}
+vec[vec %% 2 != 0 & vec > 20]
+```
+
+* dónde toma vec su valor máximo
+
+```{r comment=''}
+which.max(vec)
+```
+
+* dónde toma vec sus valores mínimos
+
+```{r comment=''}
+which(vec == min(vec))
+```
+
+# Pregunta 7:
+Adjunta las instrucciones para resolver el Ejercicio 1 del PDF adjunto
+
+```{r comment='', results='hold'}
+A = matrix(1:4, byrow = T, ncol = 2)
+A
+M = A * (A + A)
+M[2,2]
+```
+
+# Pregunta 8:
+Adjunta las instrucciones para resolver el Ejercicio 2 del PDF adjunto
+
+```{r comment='', results='hold'}
+B = matrix(c(2,4,-6,0,0,3,0,-2,5), byrow = T, ncol = 3)
+eigen(B)$vectors
+```
+
+# Pregunta 9:
+Adjunta las instrucciones para resolver el Ejercicio 3 del PDF adjunto
+
+```{r comment='', results='hold'}
+C = matrix(c(-48,35,-12,-134,95,-32,-194,133,-44), byrow = T, ncol = 3)
+round(eigen(C)$vectors, 3)
+```
+
+# Pregunta 10:
+Adjunta las instrucciones para resolver el Ejercicio 4 del PDF adjunto
+
+```{r comment='', results='hold'}
+D = matrix(c(-2,-8,-2,3,-3,-6,-1,2,-9,-22,-3,7,-18,-44,-8,15), byrow = T, ncol = 4)
+qr(D)$rank
+```

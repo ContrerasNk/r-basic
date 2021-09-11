@@ -192,3 +192,56 @@ names(L) # nombres de los componentes
 lm(c(1,2,3,4)~c(1,2,3,6))
 summary(lm(c(1,2,3,4)~c(1,2,3,6)))
 ```
+
+# Matrices
+
+```{r comment=''}
+M = matrix(1, nrow = 4, ncol = 6)
+M
+M = matrix(1:16, nrow = 4)
+M
+
+rbind(M, 1:4) # filas union
+cbind(M, 1:3) # columnas union
+
+diag(1, nrow = 3) # matriz diagonal, en este caso identidad
+
+M1 = matrix(1:12, nrow = 4)
+diag(M1) # diagonal aunque no sea cuadrada
+M = matrix(1:16, nrow = 4) 
+diag(M)
+dim(M1) # dimension filas y columnas
+
+M = matrix(1:16, nrow = 4) 
+sum(M) 
+mean(M)
+prod(M)
+colSums(M)
+rowMeans(M)
+
+M = matrix(1:16, nrow = 4) 
+apply(M, MARGIN = c(1,2), FUN = function(x){x^2}) # tanto para filas como columnas
+apply(M, MARGIN = 1, FUN = mean)
+apply(M, MARGIN = 1, FUN = function(x){sqrt(sum(x^2))}) # aplicar funcion a filas (1), resultado:vector
+```
+# Matrices: transpuesta y multiplicación
+
+```{r comment='', warning=FALSE}
+M = matrix(1:16, nrow = 4)
+3 * M # multiplicación con un escalar
+M * t(M) # multiplicación miembro a miembro, producto vectorial
+M %*% t(M) # multiplicacion de matrices (coincide numero de columnas y filas)
+
+suppressMessages(library(Biodem))
+mtx.exp(M, 2) # elevar una matriz al cuadrado, como un M x M
+suppressMessages(library(expm))
+M %^% 2 # es solo una aproximación al igual que el anterior
+
+qr(M) # atributos de una matriz desconocidos para mi, por ahora
+qr(M)$rank # rango de una matriz
+
+M = rbind(c(1,4,2), c(0,1,3), c(1,8,9))
+solve(M) # inversa de la matriz: debe ser cuadrada
+solve(M) %*% M # matriz identidad, no redondeada, lo arreglas con round
+solve(M, c(1,2,3)) # resolver un sistema de ecuaciones donde c(1,2,3) son los term. indeps
+```
