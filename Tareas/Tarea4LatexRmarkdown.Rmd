@@ -1,0 +1,146 @@
+---
+title: 'Tarea: LaTeX y RMarkdown'
+author: "Julio Contreras"
+date: "11/9/2021"
+output:
+  html_document:
+    fig_caption: yes
+    toc: yes
+    toc_depth: 6
+    toc_float:
+      collapsed: false
+      smooth_scroll: true 
+    number_sections: false
+    theme: darkly
+    fig_width: 7
+    fig_height: 6
+---
+
+<style>
+body {
+text-align: justify
+h1.title: left}
+</style>
+
+<style type="text/css">
+
+h1.title {
+  font-size: 45px;
+  color: #fc9272;
+  text-align: center;
+}
+
+h4.author {
+  font-size: 25px;
+  color: #fc9272;
+  text-align: center;
+}
+h4.date {
+  font-size: 20px;
+  color: #fc9272;
+  text-align: center;
+}
+</style>
+
+# Pregunta 1: 
+Realizad los siguientes productos de matrices siguiente en R:
+
+$$A \cdot B$$
+
+$$B \cdot A$$
+
+$$(A \cdot B)^{t}$$
+
+$$B^{t} \cdot A$$
+
+$$(A \cdot B)^{-1}$$
+
+$$A^{-1} \cdot B^{t}$$
+
+
+
+Donde:
+
+
+
+$$A=\begin{equation*}\begin{pmatrix}1 & 2 & 3 & 4\\ 4 & 3 & 2 & 1\\ 0 & 1 & 0 & 2 \\ 3 & 0 & 4 & 0\end{pmatrix}\end{equation*}$$
+
+<br/>
+
+$$B = \begin{equation*}\begin{pmatrix}4 & 3 & 2 & 1\\ 0 & 3 & 0 & 4\\ 1 & 2 & 3 & 4 \\ 0 & 1 & 0 & 2\end{pmatrix}\end{equation*}$$
+***Definimos las matrices en R:***
+
+```{r comment='', results='hold'}
+A = rbind(c(1,2,3,4),c(4,3,2,1),c(0,1,0,2),c(3,0,4,0))
+B = rbind(c(4,3,2,1), c(0,3,0,4),c(1,2,3,4),c(0,1,0,2))
+A
+B
+```
+
+$$A \cdot B$$
+```{r comment=''}
+A%*%B
+```
+
+
+$$B \cdot A$$
+```{r comment=''}
+B%*%A
+```
+$$(A \cdot B)^{t}$$
+```{r comment=''}
+t(A%*%B)
+```
+$$B^{t} \cdot A$$
+```{r comment=''}
+t(B)%*%A
+```
+$$(A \cdot B)^{-1}$$
+```{r comment=''}
+solve(A%*%B)
+```
+$$A^{-1} \cdot B^{t}$$
+```{r comment=''}
+solve(A)%*%t(B)
+```
+
+# Pregunta 2:
+Considerad en un vector los números de vuestro DNI y llamadlo dni. Por ejemplo, si vuestro DNI es 54201567K, vuestro vector será
+
+$$dni = (5, 4, 2, 0, 1, 5, 6, 7)$$
+
+Definid el vector en R. Calculad con R el vector dni al cuadrado, la raíz cuadrada del vector dni y, por último, la suma de todas las cifras del vector dni.
+
+Finalmente, escribid todos estos vectores también a $\LaTeX{}$
+
+Mi dni como vector: $my\_dni = (7,5,2,2,7,5,1,8)$
+
+```{r comment='', results='hold'}
+my_dni = c(7,5,2,2,7,5,1,8)
+my_dni^2
+sqrt(my_dni)
+sum(my_dni)
+```
+
+# Pregunta 3:
+Considerad el vector de las letras de vuestro nombre y apellido. Llamadlo name. Por ejemplo, en mi caso sería
+
+$$name = (M, A, R, I, A, S, A, N, T, O, S)$$
+
+Definid dicho vector en R. Calculad el subvector que solo contenga vuestro nombre. Calculad también el subvector que contenga solo vuestro apellido. Ordenadlo alfabéticamente. Cread una matriz con este vector. Redactad todos vuestros resultados y utilizad $\LaTeX{}$.
+
+Mi nombre y apellido como vector: $my_dni = (J,U,L,I,O,C,O,N,T,R,E,R,A,S)$
+
+```{r comment=''}
+my_name = c("J","U","L","I","O","C","O","N","T","R","E","R","A","S")
+```
+
+```{r comment=''}
+first_name = my_name[1:5]
+first_name
+last_name = my_name[6:length(my_name)]
+last_name
+sort(my_name)
+matrix(my_name, nrow = 2, byrow = T)
+```
+$$MY \ NAME = \begin{equation*}\begin{pmatrix}J & U & L & I & O & C & O \\ N & T & R & E & R & A & S\end{pmatrix}\end{equation*}$$
