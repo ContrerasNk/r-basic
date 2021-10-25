@@ -1,0 +1,438 @@
+---
+title: An R Markdown document converted from "02-numpy.ipynb"
+output: html_document
+---
+
+# NumPy
+
+```{python}
+import numpy as np
+```
+
+```{python}
+L1 = [1,2,3,4,5,6,7,8]# Crear una lista
+```
+
+```{python}
+x1 = np.array(L1)
+x1
+```
+
+```{python}
+x2 = np.array(L1, dtype='float32')
+x2
+```
+
+- bool_
+- int_, intc, intp, int8, int16, int32, int64
+- uint8, uint16, uint32, uint64
+- float_, float16, float32, float64 (+/-999.9999999e99999)
+- complex_, complex64, complex128 (a+bi, a,b $\in$ float_) 
+
+```{python}
+np.zeros((3,4))
+```
+
+```{python}
+np.ones((4,3))
+```
+
+```{python}
+np.arange(10)
+```
+
+```{python}
+np.arange(3,12,dtype=np.float)
+```
+
+```{python}
+np.arange(4,5,0.1)
+```
+
+```{python}
+np.linspace(1., 7., 12)
+```
+
+```{python}
+np.eye(5)
+```
+
+```{python}
+x = np.arange(24)
+x
+```
+
+```{python}
+x.reshape((6,4))
+```
+
+```{python}
+x.reshape((3,8))
+```
+
+```{python}
+x = np.array([[1,2,3,4], [5,6,7,8]])
+x
+```
+
+```{python}
+np.ravel(x)
+```
+
+```{python}
+x.flatten()
+```
+
+```{python}
+np.transpose(x)
+```
+
+```{python}
+x
+```
+
+```{python}
+np.resize(x, (5, 3))
+```
+
+### Ejercicios
+1. Crear un array de datos con valores entre 5 y 120.
+2. Crear una matriz 4x4 con los valores desde 0 hasta 15.
+3. Crear la identidad 7x7
+4. Crear un array de 20 elementos y transformarlos en una matrix 5x4
+5. Crear un array con 20 números con los valores entre 0 y 5 espaciados de forma uniforme
+
+## Propiedades de los arrays
+
+```{python}
+x = np.arange(12)
+x = x.reshape((3,4))
+x
+```
+
+```{python}
+x.ndim
+```
+
+```{python}
+x.shape
+```
+
+```{python}
+x.size
+```
+
+```{python}
+x.dtype
+```
+
+```{python}
+x.itemsize
+```
+
+```{python}
+x.data
+```
+
+```{python}
+x[2]
+```
+
+```{python}
+x[2,1]
+```
+
+```{python}
+x.shape = (4,3)
+x
+```
+
+```{python}
+x[1:3, 0:2]
+```
+
+```{python}
+y = np.arange(12)
+y
+```
+
+```{python}
+y[3:8]
+```
+
+```{python}
+y[1:7:2]
+```
+
+```{python}
+z = np.arange(10, 6, -1)
+z
+```
+
+```{python}
+y[z]
+```
+
+```{python}
+x = np.arange(50)
+x
+```
+
+```{python}
+x[x>30]
+```
+
+```{python}
+cond = (x < 25)
+cond
+```
+
+```{python}
+x[cond]
+```
+
+```{python}
+x[12:24] = 1
+x
+```
+
+```{python}
+x[13:16] = [6,9,12]
+x
+```
+
+```{python}
+x.dtype
+```
+
+```{python}
+x[5] = 3.1415
+x
+```
+
+```{python}
+x[8] = 1.2j 
+```
+
+## Copias y vistas de arrays
+
+```{python}
+x = np.arange(10)
+```
+
+```{python}
+y = x
+```
+
+```{python}
+y.shape = (2,5)
+y
+```
+
+```{python}
+x
+```
+
+```{python}
+z = x.copy()
+z
+```
+
+```{python}
+z is x
+```
+
+```{python}
+y is x
+```
+
+```{python}
+x
+```
+
+```{python}
+t = x.view()
+t
+```
+
+```{python}
+t.shape = (5,2)
+t
+```
+
+```{python}
+x
+```
+
+```{python}
+s = x[0:2, 1:3]
+s
+```
+
+```{python}
+s[:] = 5
+s
+```
+
+```{python}
+x
+```
+
+```{python}
+y
+```
+
+```{python}
+z
+```
+
+# Funciones Univeresales (ufunc)
+- Unarias: sqrt, sin, cos, **2
+- Binarias: maximum, minimum 
+
+```{python}
+x = np.arange(10)
+x
+```
+
+```{python}
+x+3
+```
+
+```{python}
+x-3
+```
+
+```{python}
+x*3
+```
+
+```{python}
+x/3
+```
+
+```{python}
+alpha = np.linspace(0,2*np.pi, 4)
+alpha
+```
+
+```{python}
+np.sin(alpha)
+```
+
+```{python}
+np.cos(alpha)
+```
+
+```{python}
+np.tan(alpha)
+```
+
+```{python}
+np.exp(x)
+```
+
+```{python}
+np.exp2(x)
+```
+
+```{python}
+np.power(3,x)
+```
+
+```{python}
+np.power(x, 2)
+```
+
+```{python}
+np.log(x)
+```
+
+```{python}
+np.log2(x)
+```
+
+```{python}
+np.log10(x)
+```
+
+$$\sum_{i=1}^n x_i$$
+
+```{python}
+np.sum(x)
+```
+
+```{python}
+np.nansum(x)
+```
+
+```{python}
+np.prod(x)
+```
+
+```{python}
+np.mean(x)
+```
+
+```{python}
+np.median(x)
+```
+
+```{python}
+np.min(x)
+```
+
+```{python}
+np.max(x)
+```
+
+```{python}
+np.std(x)
+```
+
+```{python}
+np.var(x)
+```
+
+```{python}
+np.argmin(x)
+```
+
+```{python}
+np.argmax(x)
+```
+
+```{python}
+np.percentile(x, q=0.95)
+```
+
+```{python}
+ y = np.array([True, True, True, True])
+```
+
+```{python}
+np.any(y)
+```
+
+```{python}
+np.all(y)
+```
+
+```{python}
+np.random.seed(2019)
+z = np.random.random((3,5))
+z
+```
+
+```{python}
+z.sum()
+```
+
+```{python}
+z.sum(axis=0)
+```
+
+```{python}
+z.sum(axis=1)
+```
+

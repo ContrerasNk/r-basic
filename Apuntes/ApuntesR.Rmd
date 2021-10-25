@@ -18,8 +18,8 @@ output:
 
 <style>
 body {
-text-align: justify
-h1.title: left}
+text-align: justify;
+h1.title: left;}
 </style>
 
 <style type="text/css">

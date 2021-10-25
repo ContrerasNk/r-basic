@@ -1,0 +1,271 @@
+---
+title: Collecciones
+output: html_document
+---
+
+# Listas
+Son contenedores que permiten almacenar una colección de objetos **en un orden determinado**. Se pueden acceder, añadir o eliminar objetos de forma sencilla. La lista en python es como un array en R. Las listas en python son heterogéneas, es por ello que no pueden ser igualadas como un vector.
+
+```{python}
+# Cración
+L1 = [] # Lista vacía
+L2 = ['a', 'e', 'i', 'o', 'u'] # Lista con valores iniciales
+L3 = [2,3,5,7,11] # Lista con valores enteros
+L4 = ['a', 5, True, "Juan Gabriel"] # Lista heterogénea con varios tipos de datos diferentes
+L4
+L5 = [0]*10 # Es de una lista de 10 ceros
+L5
+L4[0] # Las listas en Python empiezan en la posición número 0
+L4[1]
+L5[4] = 3.1415 # Modificación de valores
+L5
+# L5[13] = 8 este indice no existe, esta fuera de rango
+L5[13]
+L4[0:2] # Accesos de posiciones múltiples (incluye la primera, pero no la última)
+
+L5[1:4] = [1,2,3] # cambio de valores multiples, con ayuda de otra lista
+
+L5
+
+L5.append(8) # agregar numeros al final de todos los elementos o de la lista
+
+L5
+
+L5.remove(3)# Elimina la "primera" ocurrencia del objeto 3 de la lista L5, no es posicion, ojo. Si hubiera cinco 3 solo eleminaria solo la primera. 
+
+L5
+
+L5.reverse()
+L5
+L5.count(0)
+L5.index(2)
+len(L5)
+```
+El .clear elimina todos, .count para contar la ocurrencia de elementos. El .index en que posicion se encuentra tal elemento, solo el primero, creo. Len(lista) tamaño de la lista
+
+```{python}
+L = [1,2,3,4,5,6]
+L[1::2] #Sacar elementos en posición impar. Osea del 2 de 2 en 2
+L[::2] #Sacar elementos en posición par
+L[-1]
+8 in L #Si se encuentra dentro de L
+4 in L
+```
+
+# Bucles
+
+Los bucles **for** iteran sobre una colecci?n (una lista, un string, un objeto iterable)
+
+```{python}
+L = [1,2,3,4,5,6]
+for numero in L:
+    print(numero)
+numero
+```
+
+```{python}
+for x in range(0,10): # range(10) = range(0,10)
+    print(x)
+```
+
+```{python}
+for c in "Juan Gabriel":
+  print(c)
+```
+
+```{python}
+notas = [3.5, 6.7, 8, 9, 4.5]
+suma = 0
+for nota in notas:
+    suma = suma + nota
+print(suma/len(notas))
+```
+
+El bucle **while** se repite hasta que la condici?n booleana deja de ser cierta.
+
+```{python}
+count = 0
+while count < 10:
+    print(count)
+    count +=1
+```
+
+```{python}
+primos = [2,3,5,7,11,13,17,19,23,29]
+for idx, p in enumerate(primos): 
+    print(idx, p)
+```
+
+```{python}
+for idx in range(len(primos)):
+    print(idx, primos[idx])
+```
+
+# Tupla
+Una tupla es una colecci?n de objetos que no puede modificarse (tiene tama?o y contenido fijo).
+
+```{python}
+p1 = (1,)
+```
+
+```{python}
+p1
+```
+
+```{python}
+p2 = (1,2,3,4)
+```
+
+```{python}
+p2
+```
+
+```{python}
+p3 = (1,2,'c',3.1415)
+```
+
+```{python}
+p3
+```
+
+```{python}
+p3[0]
+```
+
+```{python}
+p3[0:2]
+```
+
+```{python}
+a,b,c,d = p3
+```
+
+```{python}
+a
+```
+
+```{python}
+b
+```
+
+```{python}
+c
+```
+
+```{python}
+d
+```
+
+```{python}
+l3 = list(p3)
+l3
+```
+
+```{python}
+p5 = tuple(L5)
+p5
+```
+
+```{python}
+"Hola que tal   est?s".split(" ")
+```
+
+```{python}
+"4,6,2,7,9,4,2".split(",")
+```
+
+```{python}
+numeros = input("Escribe n?meros separados por comas.")
+numerosL = numeros.split(",")
+print(numerosL)
+numerosT = tuple(numerosL)
+print(numerosT)
+```
+
+```{python}
+suma = 0
+for n in numerosT:
+    suma += int(n)
+    
+print(suma/len(numerosT))
+```
+
+# Diccionario
+Colecci?n no ordenada de pares de valores: claves <-> valores. Se indexa no por posici?n, si no utilizando las claves
+
+```{python}
+nombre = input("Introduce aqu? tu nombre")
+print("Hola %s"%nombre)
+```
+
+```{python}
+print("Estos son los n?meros primos: %s"%primos)
+```
+
+```{python}
+print("Esto es un n?mero: %d"%suma)
+```
+
+```{python}
+media = suma/len(numerosT)
+print("Esto es un n?mero decimal: %.0f"%media)
+```
+
+```{python}
+edad = {
+    "Juan Gabriel":30, 
+    "Mar?a":20, 
+    "Ricardo":53, 
+    "Antonio":45
+}
+```
+
+```{python}
+edad["Ricardo"]
+```
+
+```{python}
+edad["Ricardo"] = 52
+```
+
+```{python}
+edad
+```
+
+```{python}
+edad.keys()
+```
+
+```{python}
+edad.values()
+```
+
+```{python}
+len(edad)
+```
+
+```{python}
+"Pepe" in edad
+```
+
+```{python}
+"Mar?a" in edad
+```
+
+```{python}
+"Mario" not in edad
+```
+
+```{python}
+del edad["Antonio"]
+```
+
+```{python}
+edad
+```
+
+```{python}
+notas = {"Al1": 5.6, "Al2":7.5, "Al3": 10, "Al4":False}
+notas
+```
+

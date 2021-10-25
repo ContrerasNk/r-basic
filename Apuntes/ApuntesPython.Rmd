@@ -26,7 +26,10 @@ reticulate::py_config() # rutas
 ## Librerías
 
 ```{python eval = TRUE, warning = FALSE, comment = '', message = FALSE}
-import math 
+import math
+import numpy
+import pandas 
+
 ```
 
 # Constantes en Python
@@ -68,6 +71,8 @@ math.exp(1000.0) # overflowError demasiados decimales
 # Representación numérica
 
 ```{python warning = FALSE, comment = '', message = FALSE}
+import math 
+
 2+2
 
 3-5
@@ -108,7 +113,7 @@ math.fmod(7,3) # resto, en R %%, se puede trabajar con numeros racionales
 
 7//3 # cociente division entera
 
-math.remainder(7, 3) # cociente division entera
+# math.remainder(7, 3) # cociente division entera
 
 math.modf(-4.25) # separa parte entera y decimal: tupla
 

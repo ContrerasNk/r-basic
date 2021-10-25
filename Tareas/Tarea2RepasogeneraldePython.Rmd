@@ -38,6 +38,13 @@ for i in [-1, 1, 3.5, 0]:
   
 ```
 
+```{python}
+import pandas as pd
+s = pd.Series(['Matemáticas', 'Historia', 'Economía', 'Programación', 'Inglés'], dtype='string')
+print(s)
+```
+
+
 
 # Escribe una secuencia de instrucciones que permitan leer un número real por pantalla y que muestre si el número está en el rango entre -5 y 5
 
